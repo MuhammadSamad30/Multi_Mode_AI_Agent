@@ -71,5 +71,3 @@ The bot is designed to:
 ---
 
 **Made with ❤️ using Streamlit + Gemini API**
-
-```
