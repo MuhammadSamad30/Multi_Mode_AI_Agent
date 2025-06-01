@@ -1,0 +1,11 @@
+[project]
+name = "multi-mode-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "dotenv>=0.9.9",
+    "openai-agents>=0.0.16",
+    "streamlit>=1.45.1",
+]
