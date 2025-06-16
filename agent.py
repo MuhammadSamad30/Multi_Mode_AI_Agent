@@ -7,8 +7,7 @@ from agents import Agent, Runner, AsyncOpenAI, OpenAIChatCompletionsModel, RunCo
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
-    st.error("❌ GEMINI_API_KEY not found in .env file!")
-    st.stop()
+    raise ValueError("GEMINI_API_KEY not found in .env file!")
 
 client = AsyncOpenAI(
     api_key=api_key,
@@ -106,11 +105,12 @@ st.markdown('<div class="subtitle">Choose a mode, enter your input, and let the 
 
 mode = st.selectbox("🎯 Select a Mode", [
     "💬 Chat",
-    "🌐 Translate",
+    "✍️ Write Code",
     "🧠 Explain Code",
     "🐞 Fix Bug",
     "✍️ Summarize",
     "📚 Ask Concept",
+    "🌐 Translate",
     "💡 Project Idea"
 ])
 
@@ -121,11 +121,12 @@ user_input = st.text_area("💬 Your Input", height=180,
 def generate_prompt(mode, text):
     prompts = {
         "💬 Chat": text,
-        "🌐 Translate": f"Translate this: {text}",
+        "✍️ Write Code": f"Write code for this:\n{text}",
         "🧠 Explain Code": f"Explain this code line by line:\n{text}",
         "🐞 Fix Bug": f"Find and fix bugs in this code:\n{text}",
         "✍️ Summarize": f"Summarize this:\n{text}",
         "📚 Ask Concept": f"Explain this concept:\n{text}",
+        "🌐 Translate": f"Translate this: {text}",
         "💡 Project Idea": f"Suggest project ideas based on:\n{text}"
     }
     return prompts.get(mode, text)
